@@ -18,26 +18,25 @@ port (
 
     d_in            : in signed(DATA_WIDTH - 1 downto 0);
     w_in            : in signed(DATA_WIDTH - 1 downto 0);
-    last_in         : in std_logic;
-    valid_in        : in std_logic;
+    clear_in        : in std_logic;
+
 
     d_out           : out signed(DATA_WIDTH - 1 downto 0);
     w_out           : out signed(DATA_WIDTH - 1 downto 0);
-    last_out        : out std_logic;
-    valid_out       : out std_logic;
+    clear_out       : out std_logic;
 
-    acc_out         : out signed(ACC_WIDTH - 1 downto 0);
-    acc_out_valid   : out std_logic
-
+    acc_in          : in signed(ACC_WIDTH - 1 downto 0);
+    acc_out         : out signed(ACC_WIDTH - 1 downto 0)
 
 );
-
 
 end entity;
 
 architecture rtl of processing_element is
 
     signal acc_reg : signed(ACC_WIDTH - 1 downto 0) := (others => '0');
+    signal acc_out_reg : signed(ACC_WIDTH -1 downto 0) := (others => '0');
+    signal acc_valid : std_logic := '0';
 
 begin
 
@@ -53,41 +52,33 @@ begin
 
             d_out         <= (others => '0');
             w_out         <= (others => '0');
-            valid_out     <= '0';
-            last_out      <= '0';
 
-            acc_out       <= (others => '0');
-            acc_out_valid <= '0';
+
+            acc_out_reg   <= (others => '0');
+            clear_out     <= '0';
+            acc_valid     <= '0';
 
         else
 
             d_out     <= d_in;
             w_out     <= w_in;
-            valid_out <= valid_in;
-            last_out  <= last_in;
+            clear_out <= clear_in;
 
-            acc_out_valid <= '0';
+            product := d_in * w_in;
 
-            if valid_in = '1' then
-
-                product := d_in * w_in;
-
-                if last_in = '1' then
-
-                    acc_out <= acc_reg + resize(product, ACC_WIDTH);
-                    acc_out_valid <= '1';
-
-                    acc_reg <= (others => '0');
-
-                else
-                    acc_reg <= acc_reg + resize(product, ACC_WIDTH);
-                end if;
-
+            if clear_in = '1' then
+                acc_out_reg <= acc_reg + resize(product, ACC_WIDTH);
+                acc_reg <= (others => '0');
+                acc_valid <= '1';
+            else
+                acc_reg <= acc_reg + resize(product, ACC_WIDTH);
+                acc_valid <= '0';
             end if;
-
         end if;
     end if;
 end process;
+
+acc_out <= acc_out_reg when acc_valid = '1' else acc_in;
 
 
 end architecture;
