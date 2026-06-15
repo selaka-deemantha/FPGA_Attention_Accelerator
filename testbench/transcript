@@ -1,0 +1,75 @@
+# //  Questa Altera Starter FPGA Edition-64
+# //  Version 2025.2 linux_x86_64 May 31 2025
+# //
+# // Unpublished work. Copyright 2025 Siemens
+# //
+# // This material contains trade secrets or otherwise confidential information
+# // owned by Siemens Industry Software Inc. or its affiliates (collectively,
+# // "SISW"), or its licensors. Access to and use of this information is strictly
+# // limited as set forth in the Customer's applicable agreements with SISW.
+# //
+# // This material may not be copied, distributed, or otherwise disclosed outside
+# // of the Customer's facilities without the express written permission of SISW,
+# // and may not be used in any way not expressly authorized by SISW.
+# //
+# do pe_array_tb_run.do
+# Questa Altera Starter FPGA Edition-64 vlog 2025.2 Compiler 2025.05 May 31 2025
+# Start time: 12:37:36 on Jun 15,2026
+# vlog -reportprogress 300 -sv ../rtl/matrix_multiplier/pe.v 
+# ** Note: (vlog-220) '/tools/questa/questa_fse/linux_x86_64/../modelsim.ini' is used as the ini file.
+# -- Compiling module pe
+# 
+# Top level modules:
+# 	pe
+# End time: 12:37:36 on Jun 15,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Questa Altera Starter FPGA Edition-64 vlog 2025.2 Compiler 2025.05 May 31 2025
+# Start time: 12:37:36 on Jun 15,2026
+# vlog -reportprogress 300 -sv ../rtl/matrix_multiplier/delay_line.v 
+# ** Note: (vlog-220) '/tools/questa/questa_fse/linux_x86_64/../modelsim.ini' is used as the ini file.
+# -- Compiling module delay_line
+# 
+# Top level modules:
+# 	delay_line
+# End time: 12:37:36 on Jun 15,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Questa Altera Starter FPGA Edition-64 vlog 2025.2 Compiler 2025.05 May 31 2025
+# Start time: 12:37:36 on Jun 15,2026
+# vlog -reportprogress 300 -sv ../rtl/matrix_multiplier/pe_array.v 
+# ** Note: (vlog-220) '/tools/questa/questa_fse/linux_x86_64/../modelsim.ini' is used as the ini file.
+# -- Compiling module pe_array
+# 
+# Top level modules:
+# 	pe_array
+# End time: 12:37:36 on Jun 15,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# Questa Altera Starter FPGA Edition-64 vlog 2025.2 Compiler 2025.05 May 31 2025
+# Start time: 12:37:36 on Jun 15,2026
+# vlog -reportprogress 300 -sv pe_array_tb.v 
+# ** Note: (vlog-220) '/tools/questa/questa_fse/linux_x86_64/../modelsim.ini' is used as the ini file.
+# -- Compiling module pe_array_tb
+# 
+# Top level modules:
+# 	pe_array_tb
+# End time: 12:37:36 on Jun 15,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# ** Note: (vsim-220) '/tools/questa/questa_fse/linux_x86_64/../modelsim.ini' is used as the ini file.
+# vsim -voptargs=""+acc=npr"" pe_array_tb -wlf core_sim.wlf 
+# Start time: 12:37:36 on Jun 15,2026
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Warning: (vopt-10908) Some optimizations are turned off because the +acc switch is in effect.
+# ** Note: (vopt-220) '/tools/questa/questa_fse/linux_x86_64/../modelsim.ini' is used as the ini file.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading sv_std.std
+# Loading work.pe_array_tb(fast)
+# Loading work.pe_array(fast)
+# Loading work.delay_line(fast)
+# Loading work.delay_line(fast__1)
+# Loading work.delay_line(fast__2)
+# Loading work.pe(fast)
+# ** Note: $finish    : pe_array_tb.v(138)
+#    Time: 335 ns  Iteration: 1  Instance: /pe_array_tb
+# 1
+# Break at pe_array_tb.v line 138
+# End time: 12:38:41 on Jun 15,2026, Elapsed time: 0:01:05
+# Errors: 0, Warnings: 1
