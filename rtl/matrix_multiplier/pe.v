@@ -7,11 +7,13 @@ module pe #(
 
     input  wire signed [DATA_WIDTH-1:0] d_in,
     input  wire signed [DATA_WIDTH-1:0] w_in,
+    input  wire                         valid_in,
     input  wire                         clear_in,
 
     output reg  signed [DATA_WIDTH-1:0] d_out,
     output reg  signed [DATA_WIDTH-1:0] w_out,
     output reg                          clear_out,
+    output reg                          valid_out,
 
     input  wire signed [ACC_WIDTH-1:0] acc_in,
     output wire signed [ACC_WIDTH-1:0] acc_out
@@ -35,6 +37,7 @@ module pe #(
             d_out       <= 0;
             w_out       <= 0;
             clear_out   <= 0;
+            valid_out   <= 0;
 
             acc_valid   <= 0;
         end
@@ -44,17 +47,27 @@ module pe #(
             d_out     <= d_in;
             w_out     <= w_in;
             clear_out <= clear_in;
+            valid_out <= valid_in;
 
             // accumulation logic
-            if (clear_in) begin
-                acc_out_reg <= acc_reg + {{(ACC_WIDTH-2*DATA_WIDTH){product[2*DATA_WIDTH-1]}}, product};
-                acc_reg     <= 0;
-                acc_valid   <= 1'b1;
+            if (valid_in) begin
+                if (clear_in) begin
+                    acc_out_reg <= acc_reg + {{(ACC_WIDTH-2*DATA_WIDTH){product[2*DATA_WIDTH-1]}}, product};
+                    acc_reg     <= 0;
+                    acc_valid   <= 1'b1;
+                end
+                else begin
+                    acc_reg   <= acc_reg + {{(ACC_WIDTH-2*DATA_WIDTH){product[2*DATA_WIDTH-1]}}, product};
+                    acc_valid <= 1'b0;
+                end
+
             end
             else begin
-                acc_reg   <= acc_reg + {{(ACC_WIDTH-2*DATA_WIDTH){product[2*DATA_WIDTH-1]}}, product};
-                acc_valid <= 1'b0;
+                acc_valid <= 0;
+                acc_reg <= acc_reg;
+
             end
+            
         end
     end
 

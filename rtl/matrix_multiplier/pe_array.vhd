@@ -113,7 +113,7 @@ begin
         if rst = '1' then
             clear_bus(0) <= '0';
         else
-            if col_counter = MAT_SIZE then
+            if col_counter = MAT_SIZE - 2 then
                 clear_bus(0) <= '1';
             else
                 clear_bus(0) <= '0';
@@ -129,16 +129,45 @@ process(clk)
 begin
     if rising_edge(clk) then
         if rst = '1' then
-            for i in 
+            for i in 1 to PE_SIZE - 1 loop
+                clear_bus(i) <= '0';
+            end loop;
         else 
-
+            for i in 1 to PE_SIZE -1 loop
+                clear_bus(i) <= clear_bus(i-1);
+            end loop;
 
         end if;
 
     end if;
 
+end process;
+
+-- accumulator bus
+
+process(all) 
+begin
+    for i in 0 to PE_SIZE - 1 loop
+        acc_bus(0,i) <= (others => '0');
+        acc_out(i) <= acc_bus(PE_SIZE-1,i);
+    end loop
+
 
 end process;
+
+-- accumulator valid signal
+process(clk) 
+begin
+    if rising_edge(clk) then
+        if rst = '1' then
+            acc_out_valid <= (others => '0');
+        else
+
+        end if
+    end if; 
+
+end process;
+
 
 
 
@@ -155,20 +184,17 @@ gen_row : for i in 0 to PE_SIZE - 1 generate
             clk             => clk,
             rst             => rst,
 
-            d_in            => d_bus(i,j);
-            d_out           => d_bus(i,j+1);
+            d_in            => d_bus(i,j),
+            d_out           => d_bus(i,j+1),
 
-            w_in            => w_bus(i,j);
-            w_out           => w_bus(i+1,j);
+            w_in            => w_bus(i,j),
+            w_out           => w_bus(i+1,j),
 
-            valid_in        => v_bus(i,j);
-            valid_out       => v_bus(i,j+1);
+            clear_in        => clear_bus(i,j),
+            clear_out       => clear_bus(i,j+1),
 
-            last_in         => l_bus(i,j);
-            last_out        => l_bus(i,j+1);
-
-            acc_out         => acc_bus(i,j);
-            acc_out_valid   => acc_v_bus(i,j);
+            acc_in          => acc_bus(i,j),
+            acc_out         => acc_bus(i+1,j)
 
         );
         

@@ -231,6 +231,9 @@ for (r = 0; r < PE_SIZE; r = r + 1) begin : gen_row
             .clear_in(clear_bus[r][c]),
             .clear_out(clear_bus[r][c+1]),
 
+            .valid_in(),
+            .valid_out(),
+
             .acc_in(acc_bus[r][c]),
             .acc_out(acc_bus[r+1][c])
 
