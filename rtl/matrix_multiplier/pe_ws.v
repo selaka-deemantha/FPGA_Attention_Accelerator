@@ -6,67 +6,85 @@ module pe_ws #(
     input  wire                         clk,
     input  wire                         rst,
 
+    // Data path
     input  wire signed [DATA_WIDTH-1:0] d_in,
     output reg  signed [DATA_WIDTH-1:0] d_out,
 
-
+    // Partial sum path
     input  wire signed [ACC_WIDTH-1:0]  acc_in,
     output reg  signed [ACC_WIDTH-1:0]  acc_out,
 
+    // Weight loading path
     input  wire signed [DATA_WIDTH-1:0] w_in,
     output reg  signed [DATA_WIDTH-1:0] w_out,
 
-    input  wire                         w0_fill,
-    input  wire                         w1_fill,
-
-    input  wire                         sel_in,
-    output reg                          sel_out
+    // Control
+    input  wire                         load_weight,
+    input  wire                         active_bank
 );
 
-    // Weight buffers
-    reg signed [DATA_WIDTH-1:0]         w0;
-    reg signed [DATA_WIDTH-1:0]         w1;
+    //----------------------------------------------------------
+    // Double-buffered weight storage
+    //----------------------------------------------------------
 
-    // Active weight selection
-    wire signed [DATA_WIDTH-1:0]        active_weight;
-    assign active_weight                = sel_in ? w1 : w0;
+    reg signed [DATA_WIDTH-1:0] weight_bank [0:1];
 
+    wire signed [DATA_WIDTH-1:0] active_weight;
+
+    assign active_weight = weight_bank[active_bank];
+
+    //----------------------------------------------------------
     // Multiply
-    wire signed [2*DATA_WIDTH-1:0]      product;
-    assign product                      = d_in * active_weight;
+    //----------------------------------------------------------
 
+    wire signed [2*DATA_WIDTH-1:0] product;
+
+    assign product = d_in * active_weight;
+
+    //----------------------------------------------------------
     // Main pipeline
+    //----------------------------------------------------------
+
     always @(posedge clk) begin
         if (rst) begin
 
-            d_out                       <= 0;
-            w_out                       <= 0;
-            acc_out                     <= 0;
+            d_out <= '0;
+            w_out <= '0;
 
-            w0                          <= 0;
-            w1                          <= 0;
+            acc_out <= '0;
 
-            sel_out                     <= 0;
-
+            weight_bank[0] <= '0;
+            weight_bank[1] <= '0;
 
         end
         else begin
 
-            // Pipeline forwarding
-            d_out                       <= d_in;
-            w_out                       <= w_in;
-            sel_out                     <= sel_in;
+            //--------------------------------------------------
+            // Forward systolic streams
+            //--------------------------------------------------
 
-            // Weight loading
-            if (w0_fill)
-                w0                      <= w_in;
+            d_out <= d_in;
+            w_out <= w_in;
 
-            if (w1_fill)
-                w1                      <= w_in;
+            //--------------------------------------------------
+            // Load inactive bank
+            //--------------------------------------------------
 
+            if (load_weight) begin
+
+                if (active_bank)
+                    weight_bank[0] <= w_in; // computing with bank1
+                else
+                    weight_bank[1] <= w_in; // computing with bank0
+
+            end
+
+            //--------------------------------------------------
             // MAC
-            acc_out                     <= acc_in + {{(ACC_WIDTH-2*DATA_WIDTH){product[2*DATA_WIDTH-1]}}, product};
-       
+            //--------------------------------------------------
+
+            acc_out <= acc_in + $signed(product);
+
         end
     end
 

@@ -13,19 +13,16 @@ module pe_array_ws #(
 
     input wire signed   [DATA_WIDTH-1:0 ]       d_in        [PE_SIZE-1:0],
     input wire signed   [DATA_WIDTH-1:0 ]       w_in        [PE_SIZE-1:0],
-    input wire                                  sel_in,
-    input wire                                  w1_fill,
-    input wire                                  w0_fill,
-
+    input wire                                  load_weight,
+    input wire                                  active_bank,
     output reg signed   [ACC_WIDTH-1:0 ]        acc_out     [PE_SIZE-1:0]
 
 );
 
-wire signed              [DATA_WIDTH-1:0 ]      d_bus          [0:PE_SIZE-1][0:PE_SIZE];
+wire signed              [DATA_WIDTH-1:0 ]      d_bus          [0:PE_SIZE][0:PE_SIZE-1];
 wire signed              [DATA_WIDTH-1:0 ]      w_bus          [0:PE_SIZE][0:PE_SIZE-1];
 wire signed              [ACC_WIDTH-1:0 ]       acc_bus        [0:PE_SIZE][0:PE_SIZE-1];
-wire                                            sel_bus        [0:PE_SIZE][0:PE_SIZE-1];
-reg                                             sel_line       [PE_SIZE-1:0];
+
 
 
 // first accumulator row zeroing
@@ -43,36 +40,6 @@ always @(*) begin
         acc_out[k]                              = acc_bus[PE_SIZE][k];
     end
 end
-
-// take the sel_in signal for first element of sel_line
-always @(*) begin
-    sel_line[0]                                 = sel_in;
-end
-
-// shift register for remaining bits
-integer m;
-
-always @(posedge clk) begin
-    if (rst) begin
-        for (m = 1; m < PE_SIZE; m = m + 1)
-            sel_line[m]                         <= 1'b0;
-    end
-    else begin
-        for (m = 1; m < PE_SIZE; m = m + 1)
-            sel_line[m]                         <= sel_line[m-1];
-    end
-end
-
-
-genvar n;
-generate 
-    for (n=0;n<PE_SIZE;n=n+1) begin
-        assign sel_bus[0][n]                    = sel_line[n];
-    end
-
-endgenerate
-
-
 
 // delay line for d bus and d in
 genvar a;
@@ -129,11 +96,9 @@ if (DIP_EN) begin : g_dip
                     .acc_in  (acc_bus[0][c]),
                     .acc_out (acc_bus[1][c]),
 
-                    .w0_fill (w0_fill),
-                    .w1_fill (w1_fill),
+                    .load_weight(load_weight),
+                    .active_bank(active_bank)
 
-                    .sel_in  (sel_bus[0][c]),
-                    .sel_out (sel_bus[1][c])
                 );
 
             end
@@ -159,11 +124,9 @@ if (DIP_EN) begin : g_dip
                     .acc_in  (acc_bus[r][c]),
                     .acc_out (acc_bus[r+1][c]),
 
-                    .w0_fill (w0_fill),
-                    .w1_fill (w1_fill),
+                    .load_weight(load_weight),
+                    .active_bank(active_bank)
 
-                    .sel_in  (sel_bus[r][c]),
-                    .sel_out (sel_bus[r+1][c])
                 );
 
             end
@@ -196,11 +159,9 @@ else begin : g_ws
                 .acc_in  (acc_bus[r][c]),
                 .acc_out (acc_bus[r+1][c]),
 
-                .w0_fill (w0_fill),
-                .w1_fill (w1_fill),
+                .load_weight(load_weight),
+                .active_bank(active_bank)
 
-                .sel_in  (sel_bus[r][c]),
-                .sel_out (sel_bus[r+1][c])
             );
 
         end
