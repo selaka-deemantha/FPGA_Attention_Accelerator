@@ -14,116 +14,62 @@ Z1 d/home/selaka/Desktop/FPGA_ATTENTION_ACCELERATOR/testbench
 T_opt
 !i145 1
 !i144 0
-!s110 1781507257
-V:<cZRZ1WooBQNZn_Y44AB1
-04 11 4 work pe_array_tb fast 0
-=1-00e04c682b53-6a2fa4b9-a777-1928b
+!s110 1781785855
+VZG61i6d7nWMC=_NNbVEF83
+04 21 4 work tb_accumulator_buffer fast 0
+=1-00e04c682b53-6a33e4ff-32ff0-99e5
 R0
 !s12f OEM100
 !s12b OEM100
-!s124 OEM10U17 
+!s124 OEM10U2 
 !s135 nogc
 o-quiet -auto_acc_if_foreign -work work +acc=npr
 Z2 tCvgOpt 0
 n@_opt
 OL;O;2025.2;82
-vdelay_line
-2../rtl/matrix_multiplier/delay_line.v
-Z3 DXx6 sv_std 3 std 0 22 @5XbY]_OacJl=`ToSm<M^0
-Z4 !s110 1781507256
+vaccumulator_buffer
+2../rtl/matrix_multiplier/accumulator_buffer.v
+Z3 !s110 1781785854
 !i10b 1
-!s100 =d]4oHM7V^670H?L[T10a2
-I:VELRk5Bi0^8@`g0_R;b92
-S1
+!s100 WbQgf=VFAE3[oW3kR`ff02
+IZl1QHVbd=8LBTNU3IShb20
 R1
-w1781245078
-8../rtl/matrix_multiplier/delay_line.v
-F../rtl/matrix_multiplier/delay_line.v
-!i122 1
-L0 1 56
-Z5 VDg1SIo80bB@j0V0VzS_@n1
-Z6 OL;L;2025.2;82
-r1
-!s85 0
-31
-Z7 !s108 1781507256.000000
-!s107 ../rtl/matrix_multiplier/delay_line.v|
-!s90 -reportprogress|300|-sv|../rtl/matrix_multiplier/delay_line.v|
-!i113 0
-Z8 o-sv -L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
-R2
-vpe
-2../rtl/matrix_multiplier/pe.v
-R3
-R4
-!i10b 1
-!s100 K102hU99Xl7?eWQFbAEkA1
-IP=`b3[bQAYP]ITIA4KC:=1
-S1
-R1
-w1781177764
-8../rtl/matrix_multiplier/pe.v
-F../rtl/matrix_multiplier/pe.v
+w1781778548
+8../rtl/matrix_multiplier/accumulator_buffer.v
+F../rtl/matrix_multiplier/accumulator_buffer.v
 !i122 0
-L0 1 64
-R5
-R6
+L0 1 126
+Z4 VDg1SIo80bB@j0V0VzS_@n1
+Z5 OL;L;2025.2;82
 r1
 !s85 0
 31
-R7
-!s107 ../rtl/matrix_multiplier/pe.v|
-!s90 -reportprogress|300|-sv|../rtl/matrix_multiplier/pe.v|
+Z6 !s108 1781785854.000000
+!s107 ../rtl/matrix_multiplier/accumulator_buffer.v|
+!s90 -reportprogress|300|../rtl/matrix_multiplier/accumulator_buffer.v|
 !i113 0
-R8
+Z7 o-L mtiAvm -L mtiRnm -L mtiOvm -L mtiUvm -L mtiUPF -L infact
 R2
-vpe_array
-2../rtl/matrix_multiplier/pe_array.v
+vtb_accumulator_buffer
+2tb_accumulator_buffer.v
 R3
-R4
 !i10b 1
-!s100 EiI;RVzz9QRbI4bXBc4MW3
-Idn:[80LY2Y@eG3=XcQhF53
-S1
+!s100 QBM^CU=94[nO3Q9g=Q6Wl0
+I@G@K6YWKTnM?M`;C?88cQ1
 R1
-w1781421354
-8../rtl/matrix_multiplier/pe_array.v
-F../rtl/matrix_multiplier/pe_array.v
-!i122 2
-L0 1 248
+w1781785850
+8tb_accumulator_buffer.v
+Ftb_accumulator_buffer.v
+!i122 1
+L0 3 67
+R4
 R5
-R6
 r1
 !s85 0
 31
-R7
-!s107 ../rtl/matrix_multiplier/pe_array.v|
-!s90 -reportprogress|300|-sv|../rtl/matrix_multiplier/pe_array.v|
-!i113 0
-R8
-R2
-vpe_array_tb
-2pe_array_tb.v
-R3
-R4
-!i10b 1
-!s100 djY8;;STXRf?]j2oH;LoS3
-I]dn^8K[ZP>>N9bHC5[TnC3
-S1
-R1
-w1781505129
-8pe_array_tb.v
-Fpe_array_tb.v
-!i122 3
-L0 3 140
-R5
 R6
-r1
-!s85 0
-31
-R7
-!s107 pe_array_tb.v|
-!s90 -reportprogress|300|-sv|pe_array_tb.v|
+!s107 tb_accumulator_buffer.v|
+!s90 -reportprogress|300|tb_accumulator_buffer.v|
 !i113 0
-R8
+R7
 R2

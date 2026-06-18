@@ -12,64 +12,41 @@
 # // of the Customer's facilities without the express written permission of SISW,
 # // and may not be used in any way not expressly authorized by SISW.
 # //
-# do pe_array_tb_run.do
+# do tb_accumulator_buffer_run.do
 # Questa Altera Starter FPGA Edition-64 vlog 2025.2 Compiler 2025.05 May 31 2025
-# Start time: 12:37:36 on Jun 15,2026
-# vlog -reportprogress 300 -sv ../rtl/matrix_multiplier/pe.v 
+# Start time: 18:00:54 on Jun 18,2026
+# vlog -reportprogress 300 ../rtl/matrix_multiplier/accumulator_buffer.v 
 # ** Note: (vlog-220) '/tools/questa/questa_fse/linux_x86_64/../modelsim.ini' is used as the ini file.
-# -- Compiling module pe
+# -- Compiling module accumulator_buffer
 # 
 # Top level modules:
-# 	pe
-# End time: 12:37:36 on Jun 15,2026, Elapsed time: 0:00:00
+# 	accumulator_buffer
+# End time: 18:00:54 on Jun 18,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # Questa Altera Starter FPGA Edition-64 vlog 2025.2 Compiler 2025.05 May 31 2025
-# Start time: 12:37:36 on Jun 15,2026
-# vlog -reportprogress 300 -sv ../rtl/matrix_multiplier/delay_line.v 
+# Start time: 18:00:54 on Jun 18,2026
+# vlog -reportprogress 300 tb_accumulator_buffer.v 
 # ** Note: (vlog-220) '/tools/questa/questa_fse/linux_x86_64/../modelsim.ini' is used as the ini file.
-# -- Compiling module delay_line
+# -- Compiling module tb_accumulator_buffer
 # 
 # Top level modules:
-# 	delay_line
-# End time: 12:37:36 on Jun 15,2026, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-# Questa Altera Starter FPGA Edition-64 vlog 2025.2 Compiler 2025.05 May 31 2025
-# Start time: 12:37:36 on Jun 15,2026
-# vlog -reportprogress 300 -sv ../rtl/matrix_multiplier/pe_array.v 
-# ** Note: (vlog-220) '/tools/questa/questa_fse/linux_x86_64/../modelsim.ini' is used as the ini file.
-# -- Compiling module pe_array
-# 
-# Top level modules:
-# 	pe_array
-# End time: 12:37:36 on Jun 15,2026, Elapsed time: 0:00:00
-# Errors: 0, Warnings: 0
-# Questa Altera Starter FPGA Edition-64 vlog 2025.2 Compiler 2025.05 May 31 2025
-# Start time: 12:37:36 on Jun 15,2026
-# vlog -reportprogress 300 -sv pe_array_tb.v 
-# ** Note: (vlog-220) '/tools/questa/questa_fse/linux_x86_64/../modelsim.ini' is used as the ini file.
-# -- Compiling module pe_array_tb
-# 
-# Top level modules:
-# 	pe_array_tb
-# End time: 12:37:36 on Jun 15,2026, Elapsed time: 0:00:00
+# 	tb_accumulator_buffer
+# End time: 18:00:54 on Jun 18,2026, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
 # ** Note: (vsim-220) '/tools/questa/questa_fse/linux_x86_64/../modelsim.ini' is used as the ini file.
-# vsim -voptargs=""+acc=npr"" pe_array_tb -wlf core_sim.wlf 
-# Start time: 12:37:36 on Jun 15,2026
+# vsim -voptargs=""+acc=npr"" tb_accumulator_buffer -wlf core_sim.wlf 
+# Start time: 18:00:55 on Jun 18,2026
 # ** Note: (vsim-3812) Design is being optimized...
 # ** Warning: (vopt-10908) Some optimizations are turned off because the +acc switch is in effect.
 # ** Note: (vopt-220) '/tools/questa/questa_fse/linux_x86_64/../modelsim.ini' is used as the ini file.
 # ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
-# Loading sv_std.std
-# Loading work.pe_array_tb(fast)
-# Loading work.pe_array(fast)
-# Loading work.delay_line(fast)
-# Loading work.delay_line(fast__1)
-# Loading work.delay_line(fast__2)
-# Loading work.pe(fast)
-# ** Note: $finish    : pe_array_tb.v(138)
-#    Time: 335 ns  Iteration: 1  Instance: /pe_array_tb
+# Loading work.tb_accumulator_buffer(fast)
+# Loading work.accumulator_buffer(fast)
+# START STREAMING
+# DONE
+# ** Note: $finish    : tb_accumulator_buffer.v(64)
+#    Time: 515 ns  Iteration: 1  Instance: /tb_accumulator_buffer
 # 1
-# Break at pe_array_tb.v line 138
-# End time: 12:38:41 on Jun 15,2026, Elapsed time: 0:01:05
+# Break at tb_accumulator_buffer.v line 64
+# End time: 18:21:37 on Jun 18,2026, Elapsed time: 0:20:42
 # Errors: 0, Warnings: 1

@@ -1,6 +1,2 @@
-1 10 delay_line 4 fast 62 /home/selaka/Desktop/FPGA_ATTENTION_ACCELERATOR/testbench/work 0 0 0 0 97 0
-1 10 delay_line 7 fast__1 62 /home/selaka/Desktop/FPGA_ATTENTION_ACCELERATOR/testbench/work 0 0 0 0 157 0
-1 10 delay_line 7 fast__2 62 /home/selaka/Desktop/FPGA_ATTENTION_ACCELERATOR/testbench/work 0 0 0 0 157 0
-1 2 pe 4 fast 62 /home/selaka/Desktop/FPGA_ATTENTION_ACCELERATOR/testbench/work 0 0 0 0 161 0
-1 8 pe_array 4 fast 62 /home/selaka/Desktop/FPGA_ATTENTION_ACCELERATOR/testbench/work 0 0 131072 0 800 0
-1 11 pe_array_tb 4 fast 62 /home/selaka/Desktop/FPGA_ATTENTION_ACCELERATOR/testbench/work 0 0 0 0 330 0
+1 18 accumulator_buffer 4 fast 62 /home/selaka/Desktop/FPGA_ATTENTION_ACCELERATOR/testbench/work 0 0 180224 0 177 0
+1 21 tb_accumulator_buffer 4 fast 62 /home/selaka/Desktop/FPGA_ATTENTION_ACCELERATOR/testbench/work 0 0 0 0 112 0
